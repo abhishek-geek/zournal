@@ -1,0 +1,66 @@
+.modal {
+  border: 2px solid #fff;
+  position: absolute;
+  left: 15%;
+  top: 15%;
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.modal-left {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-right {
+  width: 50%;
+  display: flex;
+}
+
+h1 {
+  font-size: larger;
+  font-weight: bold;
+}
+
+.other {
+  align-self: center;
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+form {
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 1rem;
+  font-weight: 300;
+}
+
+input {
+  margin-bottom: 0rem;
+  padding: 0.5rem;
+}
+
+.img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 50vh;
+}
+
+@media only screen and (max-width: 750px) {
+  .modal-right {
+    visibility: hidden;
+    width: 0;
+  }
+  .modal-left {
+    width: 100%;
+  }
+}
