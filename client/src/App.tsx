@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Home from "./components/Home";
 import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
@@ -13,15 +13,19 @@ function App() {
       <NavBar />
       <div className="mt-12">
         <Switch>
-          <Route path="/" exact>
-            <Home />
-          </Route>
           <Route path="/register" exact>
             <Register />
           </Route>
           <Route path="/login" exact>
             <Login />
           </Route>
+          <Route path="/404" exact>
+            <h1 className="head">4 0 4</h1>
+          </Route>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          <Redirect to="/404" />
         </Switch>
       </div>
     </div>
