@@ -1,0 +1,8 @@
+.category-card {
+  width: 40vw;
+}
+@media only screen and (max-width: 750px) {
+  .category-card {
+    width: 100vw;
+  }
+}

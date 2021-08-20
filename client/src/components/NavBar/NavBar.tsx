@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import Button from "../ui/Button";
 import "./nav.css";
 import ham from "./ham.png";
@@ -10,6 +10,14 @@ const NavBar = () => {
   const [open, setOpen] = useState("");
   const [navs, setNavs] = useState("");
   const [close, setClose] = useState("hidden");
+  const p = useParams();
+
+  useEffect(() => {
+    console.log(p);
+    setClose("hidden");
+    setNavs("");
+    setOpen("");
+  }, [p]);
 
   const showNav = () => {
     console.log("clicked open");

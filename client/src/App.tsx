@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
 import NavBar from "./components/NavBar/NavBar";
+import Journal from "./components/Journal/Journal";
 
 function App() {
   // const [notification, setNotification] = useState({type: "error" | "info"})
@@ -18,6 +19,9 @@ function App() {
           </Route>
           <Route path="/login" exact>
             <Login />
+          </Route>
+          <Route path="/journals" exact>
+            <Journal />
           </Route>
           <Route path="/404" exact>
             <h1 className="head">4 0 4</h1>

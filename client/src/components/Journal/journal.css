@@ -1,0 +1,14 @@
+div.journal-card {
+  min-height: max-content;
+  justify-content: flex-start;
+  border: 0.1rem solid rgb(116, 184, 169);
+}
+.new-journal {
+  margin-left: 50%;
+  margin-top: 0.5rem;
+}
+
+.journal-submit {
+  width: max-content;
+  margin-left: 50%;
+}

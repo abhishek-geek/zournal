@@ -63,9 +63,11 @@ li {
 @media only screen and (max-width: 600px) {
   .navs {
     visibility: hidden;
+    /* z-index: 0;   */
   }
   .navs.active {
     visibility: visible;
+    z-index: 1;
   }
   .navs ul {
     width: 100vw;
@@ -92,6 +94,7 @@ li {
   }
   .ham {
     visibility: visible;
+    z-index: 10;
     display: flex;
   }
   .ham img {
