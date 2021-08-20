@@ -1,9 +1,15 @@
 import { Journal } from "../types";
+import { AppDispatch } from "./store";
 
-interface Action {
-  type: string;
+interface Action1 {
+  type: "ADD_JOURNAL";
+  data: Journal;
+}
+interface Action2 {
+  type: "INIT_JOURNAL";
   data: Journal[];
 }
+type Action = Action1 | Action2;
 
 const initialState = [
   {
@@ -34,7 +40,7 @@ const reducer = (state = initialState, action: Action): Journal[] => {
 export const addJournal = (content: Journal) => {
   console.log(content);
 
-  return async (dispatch: any) => {
+  return async (dispatch: AppDispatch) => {
     // const anecdote = await anecService.create(content);
     console.log("inside return fn");
 
@@ -46,10 +52,10 @@ export const addJournal = (content: Journal) => {
 };
 
 export const initJournal = (anecdotes: Journal[]) => {
-  return async (dispatch: any) => {
+  return async (dispatch: AppDispatch) => {
     // const anecdotes = await anecService.getAll();
     dispatch({
-      type: "INIT_ANEC",
+      type: "INIT_JOURNAL",
       data: anecdotes,
     });
   };

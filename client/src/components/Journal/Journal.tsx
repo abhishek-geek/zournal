@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Journal } from "../../types";
 import { useDispatch, useSelector } from "react-redux";
-import { addJournal } from "../../reducers/journalReducer";
+import { addJournal, initJournal } from "../../reducers/journalReducer";
 import { RootState } from "../../reducers/store";
 import Button from "../ui/Button";
 import Card from "../ui/Card";
@@ -23,18 +23,24 @@ const JournalView = () => {
     dispatch(addJournal(entry));
   }, [dispatch]);
 
-  // const addNew = () => {
-  //   const d = new Date();
-  //   const entry = {
-  //     id: Number(d.getTime()),
-  //     date: new Date(2018, 11, 24, 10, 33, 30, 0),
-  //     content:
-  //       "Lorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipiLorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores fugiat dolores qui veritatis voluptatibus vitae, blanditiis ex sit quos, commodi possimus tempore? Ratione, molestias velit accusamus commodi nulla inventore obcaecati.",
-  //   };
-  //   console.log(entry.content);
+  const addNew = () => {
+    const d = new Date();
+    const entry = [
+      {
+        id: Number(d.getTime()),
+        date: new Date(2018, 11, 24, 10, 33, 30, 0),
+        content: "1",
+      },
+      {
+        id: Number(d.getTime()) + 1,
+        date: new Date(2018, 11, 24, 10, 33, 30, 0),
+        content: "2",
+      },
+    ];
+    console.log(entry);
 
-  //   dispatch(addJournal(entry));
-  // };
+    dispatch(initJournal(entry));
+  };
 
   const toogleFormVisibility = () => {
     // console.log(e.value);
@@ -43,6 +49,7 @@ const JournalView = () => {
 
   return (
     <div className="jj">
+      <Button className="new-journal" value="Initialize" onClick={addNew} />
       {showForm ? (
         <Button
           className="new-journal"
