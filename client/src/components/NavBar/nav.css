@@ -32,3 +32,72 @@ li {
 .btn {
   background-color: gray;
 }
+
+.ham {
+  visibility: hidden;
+}
+
+.navs ul li Button {
+  width: 8 rem;
+  background-color: brown;
+  text-transform: uppercase;
+}
+
+.user {
+  display: flex;
+}
+
+.name {
+  text-align: center;
+  display: table;
+}
+
+.name span {
+  text-transform: capitalize;
+  display: table-cell;
+  vertical-align: middle;
+  padding: 0 0.4rem;
+  font-size: larger;
+}
+
+@media only screen and (max-width: 600px) {
+  .navs {
+    visibility: hidden;
+  }
+  .navs.active {
+    visibility: visible;
+  }
+  .navs ul {
+    width: 100vw;
+    flex-direction: column;
+    /* align-items: flex-end; */
+    align-items: stretch;
+    margin: 3rem 0;
+    background-color: rgb(173, 173, 173);
+    padding-right: 10rem;
+  }
+  .navs ul li {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .navs ul li Button {
+    width: 10rem;
+    background-color: brown;
+    text-transform: capitalize;
+  }
+  .user {
+    display: flex;
+    flex-direction: column;
+  }
+  .ham {
+    visibility: visible;
+    display: flex;
+  }
+  .ham img {
+    min-width: 3rem;
+    height: 3rem;
+    position: absolute;
+    right: 0;
+  }
+}
