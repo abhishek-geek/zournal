@@ -6,7 +6,7 @@ import ham from "./ham.png";
 import back from "./back.png";
 
 const NavBar = () => {
-  const [user, setUser] = useState(false);
+  const [user] = useState(false);
   const [open, setOpen] = useState("");
   const [navs, setNavs] = useState("");
   const [close, setClose] = useState("hidden");
