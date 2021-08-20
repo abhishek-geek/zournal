@@ -18,6 +18,7 @@ const Form = () => {
       date: d,
       content,
     };
+    setContent("");
     console.log(entry);
 
     dispatch(addJournal(entry));

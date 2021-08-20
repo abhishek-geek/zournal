@@ -1,7 +1,11 @@
 div.journal-card {
-  min-height: max-content;
   justify-content: flex-start;
+  flex-wrap: nowrap;
   border: 0.1rem solid rgb(116, 184, 169);
+  cursor: pointer;
+  min-height: 10rem;
+  max-height: 40vh;
+  overflow: hidden;
 }
 .new-journal {
   margin-left: 50%;
@@ -11,4 +15,12 @@ div.journal-card {
 .journal-submit {
   width: max-content;
   margin-left: 50%;
+}
+
+.journal.modal {
+  justify-content: space-between;
+  padding: 1rem;
+  height: 60vh;
+  margin-top: auto;
+  overflow-y: scroll;
 }
