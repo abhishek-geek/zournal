@@ -2,9 +2,15 @@ import bcrypt from "bcrypt";
 import Joi, { ValidationResult } from "joi";
 import mongoose, { Document, Schema } from "mongoose";
 import jwt from "jsonwebtoken";
+import { SECRET } from "../utils/config";
 
 interface IUserInput {
   name: string;
+  email: string;
+  password: string;
+}
+
+interface LUserInput {
   email: string;
   password: string;
 }
@@ -45,7 +51,7 @@ userSchema.methods.generateAuthToken = function (): string {
       name: this.name,
       email: this.email,
     },
-    "zournal"
+    SECRET
   );
 
   return token;
@@ -54,6 +60,14 @@ userSchema.methods.generateAuthToken = function (): string {
 export function validateUser(user: IUserInput): ValidationResult {
   const schema = Joi.object({
     name: Joi.string().required(),
+    email: Joi.string().email().required(),
+    password: Joi.string().required(),
+  });
+  return schema.validate(user, { stripUnknown: true, abortEarly: true });
+}
+
+export function validateLoginUser(user: LUserInput): ValidationResult {
+  const schema = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().required(),
   });
