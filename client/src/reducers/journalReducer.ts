@@ -32,7 +32,7 @@ const initialState = [
   },
 ];
 
-const reducer = (state = initialState, action: Action): Journal[] => {
+const reducer = (state = initialState, action: Action): Journal[] | null => {
   switch (action.type) {
     case "ADD_JOURNAL": {
       // console.log("initial state", state);

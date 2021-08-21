@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Journal } from "../../types";
+import { Journal, User } from "../../types";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers/store";
 import Button from "../ui/Button";
@@ -7,6 +7,7 @@ import Card from "../ui/Card";
 import "./journal.css";
 import Form from "./Form";
 import Modal from "./Modal";
+import { Redirect } from "react-router-dom";
 
 const JournalView = () => {
   const [showForm, setShowForm] = useState(false);
@@ -14,6 +15,9 @@ const JournalView = () => {
   const [modal, setModal] = useState<Journal | undefined>();
 
   const journal = useSelector((state: RootState): Journal[] => state.journal);
+  const user = useSelector(
+    (state: RootState): User | null => state.currentUser
+  );
 
   const toogleFormVisibility = () => {
     setShowForm(!showForm);
@@ -24,6 +28,10 @@ const JournalView = () => {
     setShowModal(true);
     setModal(entry);
   };
+
+  if (!user) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <div className="jj">

@@ -6,11 +6,13 @@ import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
 import NavBar from "./components/NavBar/NavBar";
 import Journal from "./components/Journal/Journal";
+import Logout from "./components/Logout";
 
 function App() {
   // const [notification, setNotification] = useState({type: "error" | "info"})
+
   return (
-    <div className="container">
+    <div className="">
       <NavBar />
       <div className="mt-12">
         <Switch>
@@ -19,6 +21,9 @@ function App() {
           </Route>
           <Route path="/login" exact>
             <Login />
+          </Route>
+          <Route path="/logout" exact>
+            <Logout />
           </Route>
           <Route path="/journals" exact>
             <Journal />

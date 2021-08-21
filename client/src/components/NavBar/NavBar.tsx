@@ -4,16 +4,20 @@ import Button from "../ui/Button";
 import "./nav.css";
 import ham from "./ham.png";
 import back from "./back.png";
+import { useSelector } from "react-redux";
+import { RootState } from "../../reducers/store";
+import { User } from "../../types";
 
 const NavBar = () => {
-  const [user] = useState(false);
   const [open, setOpen] = useState("");
   const [navs, setNavs] = useState("");
   const [close, setClose] = useState("hidden");
   const p = useParams();
+  const user = useSelector(
+    (state: RootState): User | null => state.currentUser
+  );
 
   useEffect(() => {
-    console.log(p);
     setClose("hidden");
     setNavs("");
     setOpen("");
