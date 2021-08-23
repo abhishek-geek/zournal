@@ -18,13 +18,14 @@ Run this project using node, follow these guidelines:
 To run this project, you will need to add the following environment variables to your .env file
 
 `REACT_APP_DEV_API_URL` - Server URL for development environment
+
 `REACT_APP_PROD_API_URL` - Server URL for production environment
 
 #### Example:
 
 ```
 REACT_APP_DEV_API_URL=http://localhost:5000
-REACT_APP_PROD_API_URL=https://zournal.herokuapp.com
+REACT_APP_PROD_API_URL=https://zournal-server.herokuapp.com
 ```
 
 To run Development server
@@ -36,7 +37,7 @@ To run Development server
 To build production version
 
 ```bash
-  npm build
+  npm run build
 ```
 
 ---
