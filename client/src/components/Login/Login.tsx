@@ -1,22 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import door from "../../img/in.svg";
-import { loginUser } from "../../reducers/currentUserReducer";
+import { loginUser } from "../../reducers/userReducer";
 import Button from "../ui/Button";
 import Input from "../ui/Input";
 import "./login.css";
+import { RootState } from "../../reducers/store";
+import { User } from "../../types";
 
 const Login = () => {
   const [email, setEmail] = useState("root@zournal.com");
   const [password, setPassword] = useState("root");
   const dispatch = useDispatch();
   const routerHistory = useHistory();
-  const handleLogin = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+
+  const user = useSelector(
+    (state: RootState): User | null => state.currentUser
+  );
+
+  useEffect(() => {
+    if (user) routerHistory.push("/");
+  }, [user]);
+
+  const handleLogin = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     e.preventDefault();
     const user = { email, password };
-    dispatch(loginUser(user));
-    routerHistory.push("/");
+    // dispatch(loginUser(user));
+    const p = await loginUser(user)(dispatch);
+    if (typeof p === typeof "error") {
+      alert(p);
+      console.log(p);
+      return;
+    }
   };
   return (
     <div className="modal bg-gray-300">

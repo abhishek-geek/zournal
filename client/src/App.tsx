@@ -9,13 +9,16 @@ import Journal from "./components/Journal/Journal";
 import Logout from "./components/Logout";
 import axios from "axios";
 import "./services/config";
+import { useDispatch } from "react-redux";
+import { initUser } from "./reducers/userReducer";
 
 function App() {
   // const [notification, setNotification] = useState({type: "error" | "info"})
-
+  const dispatch = useDispatch();
   useEffect(() => {
     console.log("NODE_ENV", process.env.NODE_ENV);
     axios.get("/ping").then((res) => console.log(res.data));
+    dispatch(initUser());
   });
 
   return (

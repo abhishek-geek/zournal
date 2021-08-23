@@ -1,11 +1,11 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import thunk from "redux-thunk";
 import journalReducer from "./journalReducer";
-import currentUserReducer from "./currentUserReducer";
+import userReducer from "./userReducer";
 
 const reducer = combineReducers({
   journal: journalReducer,
-  currentUser: currentUserReducer,
+  currentUser: userReducer,
 });
 
 const store = createStore(reducer, applyMiddleware(thunk));

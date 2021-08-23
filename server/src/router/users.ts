@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
   await user.hashPassword();
   await user.save();
   const token = user.generateAuthToken();
-  return res.send({ data: token });
+  return res.send({ token });
 });
 
 router.post("/login", async (req, res) => {
@@ -35,14 +35,15 @@ router.post("/login", async (req, res) => {
 
   const user = await User.findOne({ email: String(req.body.email) });
   if (!user) {
+    console.log(`${req.body.email} does not present. Try Signing up.`);
     return res
-      .status(400)
+      .status(404)
       .send({ error: `${req.body.email} does not present. Try Signing up.` });
   }
 
   const verified = await user.comparePassword(req.body.password);
   if (!verified) {
-    return res.status(400).send({ error: "Wrong Password" });
+    return res.status(401).send({ error: "Wrong Password" });
   }
 
   const token = user.generateAuthToken();

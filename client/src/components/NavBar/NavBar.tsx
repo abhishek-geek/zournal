@@ -71,6 +71,7 @@ const NavBar = () => {
                 </Link>
               </li>
               {/* <span>Abhishek Dubey</span> */}
+              {user?.name}
             </div>
           )}
           {!user && (
