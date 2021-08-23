@@ -14,6 +14,7 @@ function App() {
   // const [notification, setNotification] = useState({type: "error" | "info"})
 
   useEffect(() => {
+    console.log("NODE_ENV", process.env.NODE_ENV);
     axios.get("/ping").then((res) => console.log(res.data));
   });
 
