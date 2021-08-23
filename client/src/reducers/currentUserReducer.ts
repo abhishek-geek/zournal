@@ -1,5 +1,6 @@
 import { User } from "../types";
 import { AppDispatch } from "./store";
+import userService from "../services/userServices";
 
 interface Action1 {
   type: "LOGIN";
@@ -33,20 +34,10 @@ const reducer = (state = null, action: Action): User | null => {
 };
 
 export const loginUser = (content: { email: string; password: string }) => {
-  // console.log(content);
-  const user = {
-    id: 1,
-    name: "Abhishek",
-    email: content.email,
-    password: content.password,
-  };
-
   return async (dispatch: AppDispatch) => {
-    // const anecdote = await anecService.create(content);
-    // console.log("inside return fn");
-    window.localStorage.setItem("user", JSON.stringify(user));
-    console.log(window.localStorage.getItem("user"));
-
+    const user = await userService.login(content);
+    if (!user) return;
+    console.log(user);
     dispatch({
       type: "LOGIN",
       data: user,
@@ -56,8 +47,7 @@ export const loginUser = (content: { email: string; password: string }) => {
 
 export const logoutUser = () => {
   return async (dispatch: AppDispatch) => {
-    // const anecdotes = await anecService.getAll();
-    window.localStorage.removeItem("user");
+    window.localStorage.removeItem("token");
     dispatch({
       type: "LOGOUT",
     });

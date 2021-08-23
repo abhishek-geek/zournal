@@ -8,7 +8,7 @@ import Input from "../ui/Input";
 import "./login.css";
 
 const Login = () => {
-  const [email, setEmail] = useState("root@zournal");
+  const [email, setEmail] = useState("root@zournal.com");
   const [password, setPassword] = useState("root");
   const dispatch = useDispatch();
   const routerHistory = useHistory();

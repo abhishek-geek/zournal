@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Home from "./components/Home";
@@ -7,9 +7,15 @@ import Login from "./components/Login/Login";
 import NavBar from "./components/NavBar/NavBar";
 import Journal from "./components/Journal/Journal";
 import Logout from "./components/Logout";
+import axios from "axios";
+import "./services/config";
 
 function App() {
   // const [notification, setNotification] = useState({type: "error" | "info"})
+
+  useEffect(() => {
+    axios.get("/ping").then((res) => console.log(res.data));
+  });
 
   return (
     <div className="">
