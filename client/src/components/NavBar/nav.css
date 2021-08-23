@@ -6,32 +6,41 @@
   flex-direction: row;
   justify-content: space-between;
   z-index: 1;
+  background-color: rgba(0, 155, 255, 0.8);
 }
 
 .navbar .logo {
+  height: 3rem;
   text-transform: uppercase;
-  margin-left: 3rem;
+  /* margin-left: 1rem; */
   margin-top: auto;
   margin-bottom: auto;
-  padding: 0.5rem;
-  font-weight: bolder;
-  border: 1px solid rgb(247, 186, 186);
-  border-radius: 1rem;
-  background-color: rgb(138, 228, 255);
-  color: rgb(212, 139, 30);
-  text-shadow: 1px 1px black;
+  padding: 0.1rem 1rem 0 1rem;
+  /* padding-top: 0.1rem;
+  padding-left: 0.1rem;
+  padding-right: 0.1rem; */
+  font-weight: 600;
+  font-size: 1.8rem;
+  letter-spacing: 0.2rem;
+  color: gold;
+  text-shadow: 1px 1px rgb(255, 0, 0);
+  /* background-color: rgba(0, 155, 255, 0.8); */
+  background-image: linear-gradient(190deg, rgba(0, 155, 255, 0.5), white);
 }
-
+.logo:hover {
+  background-color: rgb(0, 119, 255);
+}
 .navs ul {
   display: flex;
+  width: 50vw;
+  height: 3rem;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: rgba(0, 155, 255, 0.8); */
 }
 
 li {
-  margin: 0.5rem 1rem;
-}
-
-.btn {
-  background-color: gray;
+  margin-top: 0.1rem;
 }
 
 .ham {
@@ -40,18 +49,20 @@ li {
 
 .navs ul li Button {
   width: 8 rem;
-  background-color: brown;
+  background-color: rgb(0, 140, 255);
   text-transform: uppercase;
 }
 
 .user {
   display: flex;
+  width: 15rem;
+  justify-content: space-around;
 }
 
-.name {
+/* .name {
   text-align: center;
   display: table;
-}
+} */
 
 .name span {
   text-transform: capitalize;
@@ -71,27 +82,30 @@ li {
     z-index: 1;
   }
   .navs ul {
-    width: 100vw;
+    width: max-content;
+    height: max-content;
     flex-direction: column;
-    /* align-items: flex-end; */
+    align-items: flex-start;
     align-items: stretch;
     margin: 3rem 0;
-    background-color: rgb(173, 173, 173);
-    padding-right: 10rem;
+    background-color: rgba(0, 155, 255, 0.8);
+    /* padding-right: 1rem; */
   }
   .navs ul li {
     width: 100%;
     display: flex;
     justify-content: center;
+    flex-direction: column;
   }
   .navs ul li Button {
     width: 10rem;
-    background-color: brown;
-    text-transform: capitalize;
+    text-transform: uppercase;
   }
   .user {
     display: flex;
     flex-direction: column;
+    width: max-content;
+    /* align-items: center; */
   }
   .ham {
     visibility: visible;

@@ -9,7 +9,7 @@ interface Props {
 
 const Modal = ({ entry, setShowModal }: Props) => {
   return (
-    <div className="journal modal mt-40 h-40 bg-green-100  ">
+    <div className="journal modal">
       <div>
         <h1 className="modal-head">{entry.date.toString()}</h1>
         <p className="modal-content">{entry.content}</p>

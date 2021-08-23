@@ -38,7 +38,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="bg-gray-300 navbar -mt-12">
+    <div className="navbar -mt-12">
       <div className="logo">
         <Link to="/">Zournal</Link>
       </div>
@@ -60,7 +60,7 @@ const NavBar = () => {
         <ul>
           <li>
             <Link to="/">
-              <Button value="Home" className="btn w-100" />
+              <Button value="Home" className=" w-100" />
             </Link>
           </li>
           {user && (
@@ -70,8 +70,11 @@ const NavBar = () => {
                   <Button value="Logout" className="w-100" />
                 </Link>
               </li>
-              {/* <span>Abhishek Dubey</span> */}
-              {user?.name}
+              <li>
+                <Link to="/logout">
+                  <Button value={user.name} className="w-100" />
+                </Link>
+              </li>
             </div>
           )}
           {!user && (

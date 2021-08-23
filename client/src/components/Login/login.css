@@ -1,5 +1,7 @@
 .modal {
-  border: 2px solid #fff;
+  box-shadow: 0 1rem 1rem 0 #fff;
+  background-image: linear-gradient(+95deg, rgba(0, 150, 250), #941356);
+  /* border: 2px solid #fff; */
   position: absolute;
   left: 15%;
   top: 15%;

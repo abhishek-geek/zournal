@@ -22,7 +22,7 @@ function App() {
   });
 
   return (
-    <div className="">
+    <div className="main">
       <NavBar />
       <div className="mt-12">
         <Switch>
