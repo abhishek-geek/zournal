@@ -44,7 +44,8 @@ router.post("/login", async (req, res) => {
   }
 
   const token = user.generateAuthToken();
-  return res.send({ data: token });
+  // res.set("Authorization", token);
+  return res.send({ token });
 });
 
 export default router;
