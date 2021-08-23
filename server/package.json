@@ -7,7 +7,8 @@
     "tsc": "tsc",
     "dev": "ts-node-dev src/index.ts",
     "lint": "eslint --ext .ts .",
-    "start": "npm run tsc && node build/index.js"
+    "start": "node build/index.js",
+    "prod": "npm run tsc && npm start"
   },
   "author": "Abhishek Dubey",
   "license": "ISC",
