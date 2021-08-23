@@ -3,9 +3,9 @@ import useerRouter from "./router/users";
 const app = express();
 import cors from "cors";
 
-app.use(express.json());
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 app.use(cors());
+app.use(express.json());
+
 app.get("/ping", (_req, res) => {
   console.log("someone pinged");
 
