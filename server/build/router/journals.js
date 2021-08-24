@@ -29,46 +29,75 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const user_1 = __importStar(require("../model/user"));
+const journal_1 = __importStar(require("../model/journal"));
 const router = express_1.Router();
-router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { error } = user_1.validateUser(req.body);
-    if (error) {
-        console.log(error.message);
-        return res.status(400).send({ error: error.message });
-    }
-    let user = yield user_1.default.findOne({ email: String(req.body.email) });
-    if (user) {
-        return res
-            .status(400)
-            .send({ error: `${user.email} already present. Try Loging in.` });
-    }
-    user = new user_1.default(Object.assign({}, req.body));
-    yield user.hashPassword();
-    yield user.save();
-    const token = user.generateAuthToken();
-    return res.send({ token });
-}));
-router.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.body);
-    const { error } = user_1.validateLoginUser(req.body);
-    if (error) {
-        console.log(error.message);
-        return res.status(400).send({ error: error.message });
-    }
-    const user = yield user_1.default.findOne({ email: String(req.body.email) });
+router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = req.user;
     if (!user) {
-        console.log(`${req.body.email} does not present. Try Signing up.`);
-        return res
-            .status(404)
-            .send({ error: `${req.body.email} does not present. Try Signing up.` });
+        return res.status(400).send({ message: `Login first` });
     }
-    const verified = yield user.comparePassword(req.body.password);
-    if (!verified) {
-        return res.status(401).send({ error: "Wrong Password" });
+    const journals = yield journal_1.default.find({
+        author: user._id,
+    });
+    return res.send(journals);
+}));
+router.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    const user = req.user;
+    if (!user) {
+        return res.status(400).send({ message: `Login first` });
     }
-    const token = user.generateAuthToken();
-    // res.set("Authorization", token);
-    return res.send({ token });
+    const journal = yield journal_1.default.findById(id);
+    if (!journal) {
+        return res.status(404).send({ message: `Entry not found` });
+    }
+    return res.send(journal);
+}));
+router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { error } = journal_1.validateJournal(req.body);
+    if (error) {
+        console.log(error.message);
+        return res.status(400).send({ error: error.message });
+    }
+    const user = req === null || req === void 0 ? void 0 : req.user;
+    if (!user) {
+        return res.status(400).send({ message: `Login first` });
+    }
+    console.log(req.body.date);
+    //   const dd = new Date();
+    const dd = new Date(req.body.date);
+    console.log(dd);
+    const journal = new journal_1.default({
+        date: dd,
+        content: String(req.body.content),
+        author: String(user.id),
+    });
+    yield journal.save();
+    return res.send(journal);
+}));
+router.put("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    const { error } = journal_1.validateJournal(req.body);
+    if (error) {
+        console.log(error.message);
+        return res.status(400).send({ error: error.message });
+    }
+    const user = req === null || req === void 0 ? void 0 : req.user;
+    if (!user) {
+        return res.status(400).send({ message: `Login first` });
+    }
+    const journal = {
+        date: req.body.date,
+        content: req.body.entry,
+        author: user._id,
+    };
+    const updatedJournal = yield journal_1.default.findByIdAndUpdate(id, journal, {
+        new: true,
+    });
+    if (!updatedJournal) {
+        return res.status(404).send({ message: `Entry not found` });
+    }
+    yield updatedJournal.save();
+    return res.send(updatedJournal);
 }));
 exports.default = router;
