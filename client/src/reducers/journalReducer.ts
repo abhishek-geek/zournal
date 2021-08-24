@@ -1,4 +1,5 @@
-import { Journal } from "../types";
+import journalService from "../services/journalService";
+import { IJournal, Journal } from "../types";
 import { AppDispatch } from "./store";
 
 interface Action1 {
@@ -10,71 +11,54 @@ interface Action2 {
   data: Journal[];
 }
 type Action = Action1 | Action2;
-const d = new Date();
 
 const initialState = [
   {
-    id: 1,
+    _id: "string",
     date: new Date(2018, 11, 24, 10, 33, 30, 0),
     content: "This is content of this journal",
-  },
-
-  {
-    id: Number(d.getTime()),
-    date: new Date(2014, 10, 14),
-    content: "1",
-  },
-  {
-    id: Number(d.getTime()) + 1,
-    date: d,
-    content:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis distinctio assumenda ad debitis fugiat nemo, laboriosam doloribus adipisci ducimus dolore vel quae aliquid odio deserunt, quos ab illum magni.",
   },
 ];
 
 const reducer = (state = initialState, action: Action): Journal[] | null => {
   switch (action.type) {
     case "ADD_JOURNAL": {
-      // console.log("initial state", state);
-      // console.log("incomming entry", action.data);
       let newState = state.concat(action.data);
-      // console.log("state after concat", state);
-      newState = newState.sort((a, b) => +b.date - +a.date);
-      // console.log("newState", newState);
+      newState = newState.sort((a, b) => +new Date(b.date) - +new Date(a.date));
       return newState;
     }
 
     case "INIT_JOURNAL": {
-      const newState = action.data.sort((a, b) => +b.date - +a.date);
+      const newState = action.data.sort(
+        (a, b) => +new Date(b.date) - +new Date(a.date)
+      );
       return newState;
     }
     default: {
-      const newState = state.sort((a, b) => +b.date - +a.date);
+      const newState = state.sort(
+        (a, b) => +new Date(b.date) - +new Date(a.date)
+      );
       return newState;
     }
   }
 };
 
-export const addJournal = (content: Journal) => {
-  // console.log(content);
-
+export const addJournal = (content: IJournal) => {
   return async (dispatch: AppDispatch) => {
-    // const anecdote = await anecService.create(content);
-    // console.log("inside return fn");
-
+    const journal = await journalService.post(content);
     dispatch({
       type: "ADD_JOURNAL",
-      data: content,
+      data: journal,
     });
   };
 };
 
-export const initJournal = (anecdotes: Journal[]) => {
+export const initJournal = () => {
   return async (dispatch: AppDispatch) => {
-    // const anecdotes = await anecService.getAll();
+    const journal = await journalService.getAll();
     dispatch({
       type: "INIT_JOURNAL",
-      data: anecdotes,
+      data: journal,
     });
   };
 };

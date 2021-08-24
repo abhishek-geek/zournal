@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Journal, User } from "../../types";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers/store";
 import Button from "../ui/Button";
 import Card from "../ui/Card";
@@ -8,6 +8,7 @@ import "./journal.css";
 import Form from "./Form";
 import Modal from "./Modal";
 import { Redirect } from "react-router-dom";
+import { initJournal } from "../../reducers/journalReducer";
 
 const JournalView = () => {
   const [showForm, setShowForm] = useState(false);
@@ -18,6 +19,11 @@ const JournalView = () => {
   const user = useSelector(
     (state: RootState): User | null => state.currentUser
   );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(initJournal());
+  }, []);
 
   const toogleFormVisibility = () => {
     setShowForm(!showForm);
@@ -56,15 +62,23 @@ const JournalView = () => {
       )}
 
       {journal &&
-        journal.map((entry: Journal) => (
-          <Card
-            onClick={() => openModal(entry)}
-            key={entry.id}
-            className="journal-card"
-            heading={entry.date.toDateString()}
-            description={entry.content}
-          />
-        ))}
+        journal.map((entry: Journal) => {
+          console.log(entry);
+          console.log(typeof entry.date);
+          const d = new Date(entry.date);
+          console.log(d.toString());
+
+          return (
+            <Card
+              onClick={() => openModal(entry)}
+              key={entry._id}
+              className="journal-card"
+              heading={d.toUTCString().substr(0, d.toUTCString().length - 13)}
+              // heading={entry.date.toDateString()}
+              description={entry.content}
+            />
+          );
+        })}
     </div>
   );
 };

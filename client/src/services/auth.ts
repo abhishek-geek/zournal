@@ -2,7 +2,9 @@ import jwtDecode from "jwt-decode";
 import { User } from "../types";
 
 export function getToken() {
-  return localStorage.getItem("token");
+  let token = localStorage.getItem("token");
+  if (token) token = token?.substr(1, token.length - 2);
+  return token;
 }
 
 export function setToken(authToken: string): User | null {

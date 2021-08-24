@@ -1,5 +1,10 @@
 export interface Journal {
-  id: number;
+  _id: string;
+  date: Date;
+  content: string;
+}
+
+export interface IJournal {
   date: Date;
   content: string;
 }

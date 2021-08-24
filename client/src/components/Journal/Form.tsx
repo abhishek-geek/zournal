@@ -14,7 +14,6 @@ const Form = () => {
     console.log(content);
     const d = new Date();
     const entry = {
-      id: Number(d.getTime()),
       date: d,
       content,
     };
