@@ -11,6 +11,7 @@ import axios from "axios";
 import "./services/config";
 import { useDispatch } from "react-redux";
 import { initUser } from "./reducers/userReducer";
+import Card from "./components/ui/Card";
 
 function App() {
   // const [notification, setNotification] = useState({type: "error" | "info"})
@@ -24,7 +25,7 @@ function App() {
   return (
     <div className="main">
       <NavBar />
-      <div className="mt-12">
+      <div className="pt-12">
         <Switch>
           <Route path="/register" exact>
             <Register />
@@ -39,7 +40,7 @@ function App() {
             <Journal />
           </Route>
           <Route path="/404" exact>
-            <h1 className="head">4 0 4</h1>
+            <Card heading={"Page Not Found :("} className="mt-24" />
           </Route>
           <Route path="/" exact>
             <Home />

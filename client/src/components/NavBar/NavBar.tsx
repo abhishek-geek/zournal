@@ -38,7 +38,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="navbar -mt-12">
+    <div className="navbar ">
       <div className="logo">
         <Link to="/">Zournal</Link>
       </div>
@@ -59,8 +59,23 @@ const NavBar = () => {
       <div className={`navs ${navs}`}>
         <ul>
           <li>
-            <Link to="/">
-              <Button value="Home" className=" w-100" />
+            <Link to="/journals">
+              <Button value="Journal" className=" w-100" />
+            </Link>
+          </li>
+          <li>
+            <Link to="/tasks">
+              <Button value="Tasks" className=" w-100" />
+            </Link>
+          </li>
+          <li>
+            <Link to="/events">
+              <Button value="Events" className=" w-100" />
+            </Link>
+          </li>
+          <li>
+            <Link to="/notes">
+              <Button value="Notes" className=" w-100" />
             </Link>
           </li>
           {user && (
