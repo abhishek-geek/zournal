@@ -33,7 +33,9 @@ const journal_1 = __importStar(require("../model/journal"));
 const router = express_1.Router();
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const user = req.user;
+    console.log("user in get", user);
     if (!user) {
+        console.log("login");
         return res.status(400).send({ message: `Login first` });
     }
     const journals = yield journal_1.default.find({

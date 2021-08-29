@@ -31,7 +31,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateLoginUser = exports.validateUser = void 0;
+exports.validateLoginUser = exports.validateGoogleUser = exports.validateUser = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const joi_1 = __importDefault(require("joi"));
 const mongoose_1 = __importStar(require("mongoose"));
@@ -48,7 +48,6 @@ const userSchema = new mongoose_1.Schema({
     },
     password: {
         type: String,
-        required: true,
     },
 });
 userSchema.methods.comparePassword = function (password) {
@@ -78,6 +77,14 @@ function validateUser(user) {
     return schema.validate(user, { stripUnknown: true, abortEarly: true });
 }
 exports.validateUser = validateUser;
+function validateGoogleUser(user) {
+    const schema = joi_1.default.object({
+        name: joi_1.default.string().required(),
+        email: joi_1.default.string().email().required(),
+    });
+    return schema.validate(user, { stripUnknown: true, abortEarly: true });
+}
+exports.validateGoogleUser = validateGoogleUser;
 function validateLoginUser(user) {
     const schema = joi_1.default.object({
         email: joi_1.default.string().email().required(),

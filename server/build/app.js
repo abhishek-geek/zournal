@@ -15,8 +15,9 @@ app.get("/ping", (_req, res) => {
     console.log("someone pinged");
     res.send("pong");
 });
-app.use("/user", users_1.default);
 app.use(middleware_1.default.tokenExtractor);
+app.use(middleware_1.default.userIdExtractor);
+app.use("/user", users_1.default);
 app.use(middleware_1.default.userExtractor);
 app.use("/journal", journals_1.default);
 exports.default = app;

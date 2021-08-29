@@ -34,15 +34,43 @@ const tokenExtractor = (request, _response, next) => {
         next();
     }
 };
-const userExtractor = (request, _response, next) => __awaiter(void 0, void 0, void 0, function* () {
+const userIdExtractor = (request, _response, next) => {
     try {
         const token = request.token;
-        if (token) {
+        console.log("asf", token);
+        if (token && token !== "undefined") {
             // token = token.substr(1, token.length - 2);
             console.log(token);
-            const u = jsonwebtoken_1.default.verify(token, config_1.SECRET);
-            const user = yield user_1.default.findById(u._id);
-            request.user = user;
+            if (token.length < 500) {
+                console.log(token);
+                const u = jsonwebtoken_1.default.verify(token, config_1.SECRET);
+                request.userId = u.email;
+            }
+            else {
+                const u = jsonwebtoken_1.default.decode(token);
+                request.userId = u.email;
+            }
+        }
+    }
+    catch (ex) {
+        console.error(ex);
+        next();
+    }
+    finally {
+        next();
+    }
+};
+const userExtractor = (request, _response, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const userId = request.userId;
+        console.log("userid", userId);
+        if (userId) {
+            const user = yield user_1.default.findOne({ email: userId });
+            if (user) {
+                request.user = user;
+                console.log(user);
+            }
+            console.log("ou");
         }
     }
     catch (ex) {
@@ -53,5 +81,5 @@ const userExtractor = (request, _response, next) => __awaiter(void 0, void 0, vo
         next();
     }
 });
-const middleware = { tokenExtractor, userExtractor };
+const middleware = { tokenExtractor, userExtractor, userIdExtractor };
 exports.default = middleware;
