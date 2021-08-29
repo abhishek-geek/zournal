@@ -14,8 +14,9 @@ app.get("/ping", (_req, res) => {
   res.send("pong");
 });
 
-app.use("/user", useerRouter);
 app.use(middleware.tokenExtractor);
+app.use(middleware.userIdExtractor);
+app.use("/user", useerRouter);
 app.use(middleware.userExtractor);
 app.use("/journal", journalRouter);
 

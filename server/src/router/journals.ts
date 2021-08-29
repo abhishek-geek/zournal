@@ -6,7 +6,11 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   const user = req.user;
+  console.log("user in get", user);
+
   if (!user) {
+    console.log("login");
+
     return res.status(400).send({ message: `Login first` });
   }
   const journals = await Journal.find({

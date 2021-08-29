@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
+import GoogleLogin, {
+  GoogleLoginResponse,
+  GoogleLoginResponseOffline,
+} from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import door from "../../img/in.svg";
 import { RootState } from "../../reducers/store";
-import { registerUser } from "../../reducers/userReducer";
+import { googleSignup, registerUser } from "../../reducers/userReducer";
 import { User } from "../../types";
 import Button from "../ui/Button";
 import Input from "../ui/Input";
@@ -41,9 +45,31 @@ const Register = () => {
       console.log(p);
       return;
     }
-    // console.log("reduse", p);
+  };
 
-    // dispatch(p);
+  const googleSuccess = async (
+    res: GoogleLoginResponse | GoogleLoginResponseOffline
+  ) => {
+    if ("tokenId" in res) {
+      const result = res?.profileObj;
+      const token = res?.tokenId;
+      const user = {
+        name: result.name,
+        email: result.email,
+        token: token,
+      };
+      try {
+        dispatch(googleSignup(user, routerHistory));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const googleError = (er: any) => {
+    console.log("Google Sign In was unsuccessful. Try again later");
+    console.log(er);
   };
 
   return (
@@ -77,7 +103,17 @@ const Register = () => {
           />
           <Button value="Submit" onClick={(e) => handleRegister(e)} />
         </form>
-        {/* <div className="other">or</div> */}
+        <div className="other">
+          {console.log("id", process.env.REACT_APP_GOOGLE_CLIENT_ID)}
+          <GoogleLogin
+            clientId={String(process.env.REACT_APP_GOOGLE_CLIENT_ID)}
+            buttonText="Signup with Google"
+            onSuccess={googleSuccess}
+            onFailure={googleError}
+            cookiePolicy={"single_host_origin"}
+            // responseType="code,token"
+          />
+        </div>
       </div>
       <div className="modal-right">
         <img className="img" src={door} alt="door" />

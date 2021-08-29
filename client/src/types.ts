@@ -27,3 +27,9 @@ export interface NewUser {
   email: string;
   password: string;
 }
+
+export interface GoogleUser {
+  name: string;
+  email: string;
+  token: string;
+}

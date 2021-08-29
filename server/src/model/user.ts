@@ -10,6 +10,11 @@ interface IUserInput {
   password: string;
 }
 
+interface GoogleUser {
+  name: string;
+  email: string;
+}
+
 interface LUserInput {
   email: string;
   password: string;
@@ -32,7 +37,6 @@ const userSchema = new Schema<IUser>({
   },
   password: {
     type: String,
-    required: true,
   },
 });
 
@@ -62,6 +66,14 @@ export function validateUser(user: IUserInput): ValidationResult {
     name: Joi.string().required(),
     email: Joi.string().email().required(),
     password: Joi.string().required(),
+  });
+  return schema.validate(user, { stripUnknown: true, abortEarly: true });
+}
+
+export function validateGoogleUser(user: GoogleUser): ValidationResult {
+  const schema = Joi.object({
+    name: Joi.string().required(),
+    email: Joi.string().email().required(),
   });
   return schema.validate(user, { stripUnknown: true, abortEarly: true });
 }

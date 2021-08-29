@@ -26,25 +26,31 @@ const tokenExtractor = (
     next();
   }
 };
-
-const userExtractor = async (
+const userIdExtractor = (
   request: Request,
   _response: Response,
   next: NextFunction
 ) => {
   try {
     const token = request.token;
+    console.log("asf", token);
 
-    if (token) {
+    if (token && token !== "undefined") {
       // token = token.substr(1, token.length - 2);
       console.log(token);
-      const u = jwt.verify(token, SECRET) as {
-        _id: string;
-        name: string;
-        email: string;
-      };
-      const user = await User.findById(u._id);
-      request.user = user;
+
+      if (token.length < 500) {
+        console.log(token);
+        const u = jwt.verify(token, SECRET) as {
+          email: string;
+        };
+        request.userId = u.email;
+      } else {
+        const u = jwt.decode(token) as {
+          email: string;
+        };
+        request.userId = u.email;
+      }
     }
   } catch (ex) {
     console.error(ex);
@@ -54,5 +60,30 @@ const userExtractor = async (
   }
 };
 
-const middleware = { tokenExtractor, userExtractor };
+const userExtractor = async (
+  request: Request,
+  _response: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId = request.userId;
+    console.log("userid", userId);
+
+    if (userId) {
+      const user = await User.findOne({ email: userId });
+      if (user) {
+        request.user = user;
+        console.log(user);
+      }
+      console.log("ou");
+    }
+  } catch (ex) {
+    console.error(ex);
+    next();
+  } finally {
+    next();
+  }
+};
+
+const middleware = { tokenExtractor, userExtractor, userIdExtractor };
 export default middleware;

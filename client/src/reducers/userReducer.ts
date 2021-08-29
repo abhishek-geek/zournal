@@ -1,7 +1,8 @@
-import { NewUser, User } from "../types";
+import { GoogleUser, NewUser, User } from "../types";
 import { AppDispatch } from "./store";
 import userService from "../services/userServices";
 import { getCurrentUser } from "../services/auth";
+import { History } from "history";
 
 interface Action1 {
   type: "LOGIN";
@@ -18,7 +19,15 @@ interface Action4 {
   type: "INIT_USER";
   data: User | null;
 }
-type Action = Action1 | Action2 | Action3 | Action4;
+interface Action5 {
+  type: "GOOGLE_SIGNUP";
+  data: User | null;
+}
+interface Action6 {
+  type: "GOOGLE_LOGIN";
+  data: User | null;
+}
+type Action = Action1 | Action2 | Action3 | Action4 | Action5 | Action6;
 
 // const initialState = {
 //   id: 1,
@@ -29,6 +38,16 @@ type Action = Action1 | Action2 | Action3 | Action4;
 const reducer = (state = null, action: Action): User | null => {
   switch (action.type) {
     case "LOGIN": {
+      const newState = action.data;
+      return newState;
+    }
+
+    case "GOOGLE_SIGNUP": {
+      const newState = action.data;
+      return newState;
+    }
+
+    case "GOOGLE_LOGIN": {
       const newState = action.data;
       return newState;
     }
@@ -63,6 +82,43 @@ export const registerUser = (content: NewUser) => {
       type: "REGISTER",
       data: user,
     });
+  };
+};
+
+export const googleSignup = (
+  content: GoogleUser,
+  history: History<unknown>
+) => {
+  return async (dispatch: AppDispatch) => {
+    const [user, error] = await userService.registerWithGoogle(content);
+    if (error) {
+      console.error(error.data.error);
+      alert(error.data.error);
+      return;
+    }
+    console.log(user);
+    dispatch({
+      type: "GOOGLE_SIGNUP",
+      data: user,
+    });
+    history.push("/");
+  };
+};
+
+export const googleLogin = (content: GoogleUser, history: History<unknown>) => {
+  return async (dispatch: AppDispatch) => {
+    const [user, error] = await userService.loginWithGoogle(content);
+    if (error) {
+      console.error(error);
+      // alert(error.data.error);
+      return;
+    }
+    console.log(user);
+    dispatch({
+      type: "GOOGLE_LOGIN",
+      data: user,
+    });
+    history.push("/");
   };
 };
 
