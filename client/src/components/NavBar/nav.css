@@ -4,7 +4,8 @@
   height: 3rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  align-items: center;
   z-index: 1;
   /* background-color: rgba(0, 195, 255, 1); */
   background-color: #2c3531;
@@ -13,31 +14,26 @@
 .navbar .logo {
   height: 3rem;
   text-transform: uppercase;
-  /* margin-left: 1rem; */
-  margin-top: auto;
-  margin-bottom: auto;
+  margin: auto 1rem;
   padding: 0.1rem 1rem 0 1rem;
-  /* padding-top: 0.1rem;
-  padding-left: 0.1rem;
-  padding-right: 0.1rem; */
   font-weight: 600;
   font-size: 1.8rem;
   letter-spacing: 0.2rem;
-  color: gold;
-  text-shadow: 1px 1px rgb(255, 0, 0);
+  color: rgb(155, 181, 182);
+  text-shadow: 1px 1px rgb(157, 229, 231);
+  border-right: 1px solid rgb(157, 229, 231);
   /* background-color: rgba(0, 155, 255, 0.8); */
   /* background-image: linear-gradient(190deg, rgba(0, 155, 255, 0.5), white); */
 }
 .logo:hover {
-  background-color: rgb(0, 119, 255);
+  /* background-color: rgb(52, 132, 163); */
+  transform: scale(1.05);
 }
 .navs ul {
   display: flex;
-  width: 50vw;
+  /* width: 50vw; */
   height: 3rem;
-  justify-content: space-between;
   align-items: center;
-  /* background-color: rgba(0, 155, 255, 0.8); */
 }
 
 li {
@@ -45,19 +41,30 @@ li {
 }
 
 .ham {
+  position: absolute;
   visibility: hidden;
 }
 
 .navs ul li Button {
   width: 8 rem;
-  /* background-color: rgb(0, 140, 255); */
   text-transform: uppercase;
+  margin-right: 1rem;
 }
 
 .user {
   display: flex;
+  position: absolute;
+  right: 0;
   width: 15rem;
   justify-content: space-around;
+}
+
+.user Button {
+  color: rgb(23, 24, 21);
+  background-color: rgb(228, 98, 89);
+}
+.user Button:hover {
+  background-color: rgba(66, 127, 206, 0.413);
 }
 
 /* .name {
@@ -83,14 +90,21 @@ li {
     z-index: 1;
   }
   .navs ul {
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: 3rem;
     width: max-content;
     height: max-content;
     flex-direction: column;
     align-items: flex-start;
     align-items: stretch;
-    margin: 3rem 0;
-    background-color: rgba(0, 155, 255, 0.8);
-    /* padding-right: 1rem; */
+    background-color: #2c3531;
+    padding: 1rem 1rem;
+    border-radius: 0rem 0rem 0rem 1rem;
+  }
+  .user {
+    position: relative;
   }
   .navs ul li {
     width: 100%;
@@ -101,6 +115,7 @@ li {
   .navs ul li Button {
     width: 10rem;
     text-transform: uppercase;
+    margin-right: 0;
   }
   .user {
     display: flex;
@@ -109,20 +124,24 @@ li {
     /* align-items: center; */
   }
   .ham {
+    position: absolute;
+    right: 0;
+    top: 0;
     visibility: visible;
     z-index: 10;
-    display: flex;
+    /* display: flex; */
   }
   .ham img {
     min-width: 2.8rem;
-    height: 3rem;
+    height: 2.8rem;
     position: absolute;
     padding: 0 0.1rem;
     /* margin-right: 0.2rem;
     margin-top: 0.2rem; */
     margin: 0.2rem;
     right: 0;
-    background-color: rgba(0, 204, 255, 0.74);
+    /* background-color: rgba(0, 204, 255, 0.74); */
+    filter: invert();
     border-radius: 20%;
   }
 }

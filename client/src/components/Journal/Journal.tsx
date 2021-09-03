@@ -40,7 +40,7 @@ const JournalView = () => {
   }
 
   return (
-    <div className="jj">
+    <div className="journal-view">
       {showForm ? (
         <Button
           className="new-journal"
@@ -61,24 +61,22 @@ const JournalView = () => {
         <Modal entry={modal} setShowModal={setShowModal} />
       )}
 
-      {journal &&
-        journal.map((entry: Journal) => {
-          console.log(entry);
-          console.log(typeof entry.date);
-          const d = new Date(entry.date);
-          console.log(d.toString());
+      <div className="journals">
+        {journal &&
+          journal.map((entry: Journal) => {
+            const d = new Date(entry.date);
 
-          return (
-            <Card
-              onClick={() => openModal(entry)}
-              key={entry._id}
-              className="journal-card"
-              heading={d.toUTCString().substr(0, d.toUTCString().length - 13)}
-              // heading={entry.date.toDateString()}
-              description={entry.content}
-            />
-          );
-        })}
+            return (
+              <Card
+                onClick={() => openModal(entry)}
+                key={entry._id}
+                className="journal-card"
+                heading={d.toUTCString().substr(0, d.toUTCString().length - 13)}
+                description={entry.content}
+              />
+            );
+          })}
+      </div>
     </div>
   );
 };

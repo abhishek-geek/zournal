@@ -22,13 +22,16 @@ const Form = () => {
 
     dispatch(addJournal(entry));
   };
+  const d = new Date();
 
   return (
-    <div className="bg-green-100 mx-5">
+    <div className="add-journal">
       <form className="">
         {/* <Input type="text" label="Start writing" /> */}
+        <h1>{d.toUTCString().substr(0, d.toUTCString().length - 13)}</h1>
         <textarea
-          className="mt-5 p-2"
+          className=""
+          name="entry"
           rows={4}
           cols={50}
           placeholder="Start Writing..."
@@ -36,7 +39,7 @@ const Form = () => {
           onChange={(e) => setContent(e.target.value)}
         />
         <Button
-          className="journal-submit"
+          className="add-journal-btn"
           value="Submit"
           onClick={(e) => handleForm(e)}
         />

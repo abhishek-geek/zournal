@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Button from "../ui/Button/Button";
 import "./nav.css";
@@ -17,12 +17,21 @@ const NavBar = () => {
     (state: RootState): User | null => state.currentUser
   );
 
+  const menu = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     setClose("hidden");
     setNavs("");
     setOpen("");
   }, [p]);
-
+  useEffect(() => {
+    document.addEventListener("mousedown", (e) => {
+      if (!menu.current?.contains(e.target as Node)) {
+        hideNav();
+      }
+    });
+    // hideNav();
+  }, [menu]);
   const showNav = () => {
     console.log("clicked open");
     setClose("");
@@ -56,7 +65,7 @@ const NavBar = () => {
           alt="menu"
         />
       </div>
-      <div className={`navs ${navs}`}>
+      <div className={`navs ${navs}`} ref={menu}>
         <ul>
           <li>
             <Link to="/journals">
