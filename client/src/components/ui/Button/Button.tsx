@@ -1,4 +1,5 @@
 import React from "react";
+import classes from "./Button.module.css";
 
 interface Props {
   className?: string;
@@ -8,10 +9,7 @@ interface Props {
 
 const Button = ({ value, className, onClick }: Props) => {
   return (
-    <button
-      onClick={onClick}
-      className={`${className} bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded`}
-    >
+    <button onClick={onClick} className={`${className} ${classes.btn}`}>
       {value}
     </button>
   );

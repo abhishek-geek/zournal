@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Button from "../ui/Button";
+import Button from "../ui/Button/Button";
 import "./nav.css";
 import ham from "./ham.png";
 import back from "./back.png";

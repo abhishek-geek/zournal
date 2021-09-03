@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addJournal } from "../../reducers/journalReducer";
-import Button from "../ui/Button";
+import Button from "../ui/Button/Button";
 // import Input from "../ui/Input";
 import "./journal.css";
 

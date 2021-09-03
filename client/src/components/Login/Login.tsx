@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import door from "../../img/in.svg";
 import { loginUser, googleLogin } from "../../reducers/userReducer";
-import Button from "../ui/Button";
+import Button from "../ui/Button/Button";
 import Input from "../ui/Input";
 import "./login.css";
 import { RootState } from "../../reducers/store";

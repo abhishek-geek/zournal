@@ -9,7 +9,7 @@ import door from "../../img/in.svg";
 import { RootState } from "../../reducers/store";
 import { googleSignup, registerUser } from "../../reducers/userReducer";
 import { User } from "../../types";
-import Button from "../ui/Button";
+import Button from "../ui/Button/Button";
 import Input from "../ui/Input";
 import "./register.css";
 

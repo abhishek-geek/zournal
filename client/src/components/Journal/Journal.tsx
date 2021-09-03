@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Journal, User } from "../../types";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers/store";
-import Button from "../ui/Button";
+import Button from "../ui/Button/Button";
 import Card from "../ui/Card";
 import "./journal.css";
 import Form from "./Form";

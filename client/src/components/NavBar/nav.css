@@ -7,7 +7,7 @@
   justify-content: space-between;
   z-index: 1;
   /* background-color: rgba(0, 195, 255, 1); */
-  background-color: transparent;
+  background-color: #2c3531;
 }
 
 .navbar .logo {
@@ -50,7 +50,7 @@ li {
 
 .navs ul li Button {
   width: 8 rem;
-  background-color: rgb(0, 140, 255);
+  /* background-color: rgb(0, 140, 255); */
   text-transform: uppercase;
 }
 

@@ -11,10 +11,12 @@
   background-color: aliceblue;
   justify-content: space-evenly;
   background-image: linear-gradient(white, rgba(0, 155, 255, 0.5));
+  border-radius: 10px;
 }
 
 .card:hover {
-  box-shadow: 0 1rem 1.2rem 0 rgb(255, 0, 255);
+  box-shadow: 0rem 0rem 0.5rem 0.5rem #1a73e8ab;
+  background-image: linear-gradient(white, rgba(0, 153, 255, 0.842));
 }
 
 .head {
